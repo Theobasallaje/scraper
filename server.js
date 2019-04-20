@@ -36,6 +36,9 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Routes
+app.get('/', function (req, res) {
+  res.render('index');
+});
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
