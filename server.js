@@ -50,27 +50,28 @@ app.get("/scrape", function (req, res) {
     // Now, we grab every h2 within an article tag, and do the following:
     // Save an empty result object
     var result = {};
-    var user = {};
-    $("article p username").each(function (i, element) {
-      user.user = $(this)
-        .children("a")
-        .text();
+    // $("article p username").each(function (i, element) {
+    //   user.user = $(this)
+    //     .children("a")
+    //     .text();
 
-      // console.log(result.user);
-    });
+    //   // console.log(result.user);
+    // });
 
-    $("article h2").each(function (i, element) {
+    $("article").each(function (i, element) {
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this)
+        .children("h2")
         .children("a")
         .text();
       result.link = $(this)
+        .children("h2")
         .children("a")
         .attr("href");
-      for (var i = 0; i < user.length; i++) {
-        result.user = user[i];
-      }
-
+      result.user = $(this)
+        .children("p")
+        .children("username")
+        .text()
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
         .then(function (dbArticle) {
