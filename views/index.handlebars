@@ -11,11 +11,17 @@
 
 <body>
     <div id="wrapper" class="w3-container">
-        <h1>News Scraper</h1>
-        <h2><i>Stay Informed.</i></h2>
-        <form action="/scrape">
-            <input id="scrapeButton" type="submit" value="Scrape!" />
-        </form>
+        <div id="scrapeAndTitle">
+            <div id="siteTitle">
+                <h1>News Scraper</h1>
+                <h2><i>Stay Informed.</i></h2>
+            </div>
+            <div id="scrapeDiv">
+            <form action="/scrape">
+                <input id="scrapeButton" type="submit" value="Scrape!" />
+            </form>
+            </div>
+        </div>
         <div id="articles"></div>
         <div id="articleCommentsContainer">
             <div id="header"></div>

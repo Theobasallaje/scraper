@@ -3,7 +3,25 @@ $.getJSON("/articles", function (data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<br />" + data[i].user + "</p>");
+    // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<br />" + data[i].user + "</p>");
+    // $("#articles").append(`<p data-id='${data[i]._id}'>Title: ${data[i].title}<br /> Link: ${data[i].link}<br /> User: ${data[i].user}</p>`);
+    $("#articles").append(`
+    <br/><br/>
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:5=100%;">
+        <header class="w3-container w3-blue">
+          <h3 data-id='${data[i]._id}'>${data[i].title}</h3>
+        </header>
+      <div class="w3-container">
+        <p><a href="${data[i].link}">Go to the Article!</a></p>
+      </div>
+      <footer class="w3-container w3-blue">
+        <h5>By: ${data[i].user}</h5>
+      </footer>
+  </div>
+</div>
+`
+    );
   }
   // console.log(data[0]);
 });
@@ -12,7 +30,7 @@ $.getJSON("/articles", function (data) {
 
 
 // Whenever someone clicks a p tag
-$(document).on("click", "p", function () {
+$(document).on("click", "h3", function () {
   // Empty the notes from the note section
   $("#notes").empty();
   $("#header").empty();
@@ -31,7 +49,7 @@ $(document).on("click", "p", function () {
       // // The title of the article
       // $("#notes").append("<h2>" + data.title + "</h2>");
       // commenmts section
-      $("#header").append(`<h2>Comments for ${data.title}</h2>`);
+      $("#header").append(`<h4>Comments for ${data.title}</h4>`);
       // // An input to enter a new title
       // $("#notes").append("<input id='titleinput' name='title' >");
       if (data.note) {
@@ -51,10 +69,10 @@ $(document).on("click", "p", function () {
 });
 
 // When you click the savenote button
-var i = 0;
 $(document).on("click", "#savenote", function () {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
+  var articleId = $(this).attr("data-id");
   // $("#comments").append(`<p>${$("#bodyinput").val()}</p>`);
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
@@ -69,9 +87,10 @@ $(document).on("click", "#savenote", function () {
   })
     // With that done
     .then(function (data) {
-      $("#comments").append(`<div data-id="${data.note[i]._id}" article-id="${thisId}" class="commentData" id="comment${data.note[i]._id}"><p>${$("#bodyinput").val()}</p> 
-      <button data-id="${data.note[i]._id}" article-id="${thisId}" id='deletenote'>Delete
+      $("#comments").append(`<div data-id="${thisId}" article-id="${articleId}" class="commentData" id="comment${thisId}"><p>${$("#bodyinput").val()}</p> 
+      <button data-id="${thisId}" article-id="${articleId}" id='deletenote'>Delete
       </button></div>`);
+      $("#bodyinput").val("");
       // Log the response
       // var data = JSON.stringify(data);
       console.log(data);
@@ -86,18 +105,54 @@ $(document).on("click", "#savenote", function () {
   // Also, remove the values entered in the input and textarea for note entry
   // $("#titleinput").val("");
   // $("#bodyinput").val("");
-  i++;
 });
 
 $(document).on("click", "#deletenote", function () {
   var commentId = $(this).attr("data-id");
   // var deleteId = $(this).attr("delete-id");
   var articleId = $(this).attr("article-id");
+  var thisId = $(this).attr("data-id");
+  // $.ajax({
+  //   type: "PUT",
+  //   url: "/comments/" + articleId + "/note/" + commentId
+  // })
+  //   .then(function () {
+  //     $(`#comment${commentId}`).empty();
+  //     $.ajax({
+  //       method: "GET",
+  //       url: "/articles/" + thisId
+  //     })
+  //       .then(function (data) {
+  //         console.log(thisId);
+  //         if (data.note) {
+  //           for (var i = 0; i < data.note.length; i++) {
+  //             $("#comments").append(`<div data-id="${data.note[i]._id}" article-id="${thisId}" class="commentData" id="comment${data.note[i]._id}"><p>${data.note[i].body}</p> 
+  //                                   <button data-id="${data.note[i]._id}" article-id="${thisId}" id='deletenote'>Delete
+  //                                   </button></div>`); // adding delete button here
+  //           }
+  //         }
+  //       });
+  //   });
+  $.ajax({
+    method: "GET",
+    url: "/articles/" + thisId
+  })
+    .then(function (data) {
+      console.log(thisId);
+
+    });
   $.ajax({
     type: "PUT",
     url: "/comments/" + articleId + "/note/" + commentId
   })
-    .then(function (data) {
+    .then(function () {
       $(`#comment${commentId}`).empty();
     });
+  // if (data.note) {
+  //   for (var i = 0; i < data.note.length; i++) {
+  //     $("#comments").append(`<div data-id="${data.note[i]._id}" article-id="${thisId}" class="commentData" id="comment${data.note[i]._id}"><p>${data.note[i].body}</p> 
+  //                           <button data-id="${data.note[i]._id}" article-id="${thisId}" id='deletenote'>Delete
+  //                           </button></div>`); // adding delete button here
+  //   }
+  // }
 });
