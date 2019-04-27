@@ -87,13 +87,13 @@ $(document).on("click", "#savenote", function () {
   })
     // With that done
     .then(function (data) {
-      $("#comments").append(`<div data-id="${thisId}" article-id="${articleId}" class="commentData" id="comment${thisId}"><h3>${$("#bodyinput").val()}</h3> 
-      <button data-id="${thisId}" article-id="${articleId}" id='deletenote'>Delete
+      console.log(data);
+      $("#comments").append(`<div data-id="${data}" article-id="${articleId}" class="commentData" id="comment${data}"><h3>${$("#bodyinput").val()}</h3> 
+      <button data-id="${data}" article-id="${articleId}" id='deletenote'>Delete
       </button></div>`);
       $("#bodyinput").val("");
       // Log the response
       // var data = JSON.stringify(data);
-      console.log(data);
       // for (var i=0; i < data.note.length; i++) {
       //   console.log(`data for index ${i} ${$("#bodyinput").val()}`);
       //   // console.log(`data for index ${i} ${(data.note[i].body)}`);
@@ -133,19 +133,20 @@ $(document).on("click", "#deletenote", function () {
   //         }
   //       });
   //   });
-  $.ajax({
-    method: "GET",
-    url: "/articles/" + thisId
-  })
-    .then(function (data) {
-      console.log(thisId);
+  // $.ajax({
+  //   method: "GET",
+  //   url: "/articles/" + thisId
+  // })
+  //   .then(function (data) {
+  //     console.log(thisId);
 
-    });
+  //   });
   $.ajax({
     type: "PUT",
     url: "/comments/" + articleId + "/note/" + commentId
   })
-    .then(function () {
+    .then(function (result) {
+      console.log(result);
       $(`#comment${commentId}`).empty();
     });
   // if (data.note) {
