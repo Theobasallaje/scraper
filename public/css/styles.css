@@ -26,8 +26,11 @@ body { background-color: darkblue; color: white }
       }
       
       #comments {
-        float: right;
+        display: inline-block;
+        overflow: auto;
+        /* float: right; */
         width: 100%;
+        height: 40vh;
         /* border: 2px solid black; */
       }
 
