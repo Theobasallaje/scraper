@@ -1,16 +1,16 @@
 body { background-color: darkblue; color: white }
       #wrapper {
-        width: 960px;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
-        padding-top: 5%;
+        /* padding-top: 5%; */
         /* border: 2px solid green; */
       }
       #articles {
         display: inline-block;
         overflow: auto;
         width: 60%;
-        height: 700px;
+        height: 100%;
         /* border: 2px solid purple; */
       }
       #notes {
@@ -35,7 +35,7 @@ body { background-color: darkblue; color: white }
         float: right;
         display: flex;
         flex-direction: column;
-        width: 30%;
+        width: 40%;
         /* border: 2px solid black; */
       }
 
@@ -61,8 +61,8 @@ body { background-color: darkblue; color: white }
         font-size: 18px;
       }
 
-#scrapeButton{
-  width: 6em;
+#savenote, #deletenote{
+  /* width: 6em; */
   background-color: #2196F3; /* same blue as title card section */
   border: none;
   color: white;
@@ -70,7 +70,24 @@ body { background-color: darkblue; color: white }
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 24px;
+}
+
+#savenote {
+  width: 192px;
+  text-align: center;
+}
+
+#scrapeButton {
+  width: 6em;
+  background-color: #2196F3; /* same blue as title card section */
+  border: none;
+  color: white;
+  padding: 0px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
 }
 
 #scrapeAndTitle {
@@ -80,4 +97,22 @@ body { background-color: darkblue; color: white }
 
 #scrapeDiv {
   margin: 46px 8em;
+}
+
+#heading {
+  font-size: 56px;
+}
+
+#articles p{
+  font-size: 20px;
+}
+
+#commentTitle {
+  margin-top: 36px;
+}
+
+#commentButtonDiv {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }

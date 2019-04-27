@@ -10,13 +10,13 @@ $.getJSON("/articles", function (data) {
     <div class="w3-container">
       <div class="w3-card-4" style="width:5=100%;">
         <header class="w3-container w3-blue">
-          <h3 data-id='${data[i]._id}'>${data[i].title}</h3>
+          <h1 data-id='${data[i]._id}'>${data[i].title}</h1>
         </header>
       <div class="w3-container">
         <p><a href="${data[i].link}">Go to the Article!</a></p>
       </div>
       <footer class="w3-container w3-blue">
-        <h5>By: ${data[i].user}</h5>
+        <h3>By: ${data[i].user}</h3>
       </footer>
   </div>
 </div>
@@ -30,7 +30,7 @@ $.getJSON("/articles", function (data) {
 
 
 // Whenever someone clicks a p tag
-$(document).on("click", "h3", function () {
+$(document).on("click", "h1", function () {
   // Empty the notes from the note section
   $("#notes").empty();
   $("#header").empty();
@@ -49,7 +49,7 @@ $(document).on("click", "h3", function () {
       // // The title of the article
       // $("#notes").append("<h2>" + data.title + "</h2>");
       // commenmts section
-      $("#header").append(`<h4>Comments for ${data.title}</h4>`);
+      $("#header").append(`<h2 id='commentTitle'>Comments for ${data.title}</h2>`);
       // // An input to enter a new title
       // $("#notes").append("<input id='titleinput' name='title' >");
       if (data.note) {
@@ -62,7 +62,7 @@ $(document).on("click", "h3", function () {
       // A textarea to add a new note body
       $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
       // A button to submit a new note, with the id of the article saved to it
-      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Add Comment</button>");
+      $("#notes").append("<div id='commentButtonDiv'><button data-id='" + data._id + "' id='savenote'>Add Comment</button></div>");
       // $("#notes").append("<button data-id='" + data._id + "' id='deletenote'>Delete Comment</button>");
       // If there's a note in the article
     });
