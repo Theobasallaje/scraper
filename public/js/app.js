@@ -54,7 +54,7 @@ $(document).on("click", "h1", function () {
       // $("#notes").append("<input id='titleinput' name='title' >");
       if (data.note) {
         for (var i = 0; i < data.note.length; i++) {
-          $("#comments").append(`<div data-id="${data.note[i]._id}" article-id="${thisId}" class="commentData" id="comment${data.note[i]._id}"><p>${data.note[i].body}</p> 
+          $("#comments").append(`<div data-id="${data.note[i]._id}" article-id="${thisId}" class="commentData" id="comment${data.note[i]._id}"><h3>${data.note[i].body}</h3> 
                                 <button data-id="${data.note[i]._id}" article-id="${thisId}" id='deletenote'>Delete
                                 </button></div>`); // adding delete button here
         }
@@ -87,7 +87,7 @@ $(document).on("click", "#savenote", function () {
   })
     // With that done
     .then(function (data) {
-      $("#comments").append(`<div data-id="${thisId}" article-id="${articleId}" class="commentData" id="comment${thisId}"><p>${$("#bodyinput").val()}</p> 
+      $("#comments").append(`<div data-id="${thisId}" article-id="${articleId}" class="commentData" id="comment${thisId}"><h3>${$("#bodyinput").val()}</h3> 
       <button data-id="${thisId}" article-id="${articleId}" id='deletenote'>Delete
       </button></div>`);
       $("#bodyinput").val("");
